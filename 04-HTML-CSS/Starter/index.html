@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- The properties of the page, including the title visible in the brower tab -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning HTML and CSS</title>
+  </head>
+  <!-- Linking to a css file for styling, same as previous exercises with javascript files -->
+  <link href="style.css" rel="stylesheet" />
+  <!-- The content displayed in the page itself -->
+  <body>
+    <!-- defines a large heading -->
+    <h1>JavaScript is fun, but so is HTML and CSS</h1>
+    <!-- defines a paragraph, the class attribute can be applied to multiple paragraphs to style them as one -->
+    <p class="first">
+      You can learn JavaScript without HTML and CSS, but for DOM manipulation
+      it's useful to have some basic ideas of HTML and CSS. You can learn more
+      about it on
+      <!-- anchor, hypertext reference -->
+      <a href="http://guacamole.homeiswhereip.ca">Guigui's server</a>.
+    </p>
+    <h2>Another heading</h2>
+    <p class="second">Just another paragraph</p>
+    <h6>Another heading again</h6>
+    <!-- to add an image, id, image source, title for mouseover -->
+    <img
+      id="penguin-image"
+      src="https://image.shutterstock.com/image-vector/cute-penguin-on-ice-cube-260nw-1087553804.jpg"
+      title="UN PAINGWIN!"
+    />
+    <!-- insert a form in the page -->
+    <form id="your-name">
+      <h2>Your name here</h3>
+      <p class="first">Please fill in this form :)</p>
+      <!-- what's written in the form box to give an indication to user -->
+      <input type="text" placeholder="Your name" />
+      <!-- a button to  execute the code associated with the form -->
+      <button>OK!</button>
+    </form>
+  </body>
+</html>

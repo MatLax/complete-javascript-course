@@ -1,0 +1,70 @@
+/* In CSS the content of a web page is in boxes. Inside the box there's the CONTENT part where the different elements are (text, images...), the PADDING part that's empty space around the CONTENT with a BORDER that goes around it and that's surrounded by the MARGIN that's the space between different boxes and the FILL AREA that's the area that gets filled with background color/images*/
+
+/* HTML elements have predetermined spacing attributes that need to get reseted before styling the page, the * selector applies to everything in the code*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* We always add this attribute*/
+}
+
+/*Applies to everything in the <body> section, inherited by other elements*/
+body {
+  background-color: rgb(83, 81, 199);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  padding: 75px;
+}
+
+/*Can supersede the previous attributes by pointing at specific elements, in this case everything in the <h1> section*/
+h1 {
+  font-size: 50px;
+  margin-bottom: 25px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/*Selecting elements of the same class no matter where they are in the code*/
+.first {
+  color: red;
+}
+
+/*Slecting elements with the same id no matter where they are in the code*/
+#your-name {
+  background-color: yellow;
+  border: 5px dashed #444;
+  width: 400px;
+  padding: 25px;
+  margin-top: 50px;
+}
+
+/* Adding attributes to all paragraphs no matter the class name */
+p {
+  margin-bottom: 20px;
+}
+
+/* adding style to input and button */
+input,
+button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* adding style to all links*/
+a {
+  background-color: rgb(43, 226, 67);
+}
+
+/* Slecting specific child element, useful when more than one elements are the same, in this case h2 is used twice but we only want to affect the one in the form which has the your-name class */
+#your-name h2 {
+  color: olivedrab;
+}
+
+/* Changing image size, if we don't it will just be the size of the source */
+#penguin-image {
+  /* By only setting the width or the height it will scale properly, let's not just for fun */
+  width: 300px;
+  height: 200px;
+}
