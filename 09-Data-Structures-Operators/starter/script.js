@@ -92,7 +92,7 @@ restaurant.orderDelivery({
 
 ////////////////// Spread Operator /////////////
 
-const ingredients = [
+/*const ingredients = [
   prompt(`Let's make pasta! Ingredient 1?`),
   prompt(`Ingredient 2?`),
   prompt(`Ingredient 3?`),
@@ -107,7 +107,7 @@ restaurant.orderPasta(...ingredients);
 
 // On objects
 const newRestaurant = { foundedIn: 1998, ...restaurant, founder: `Guiseppe` };
-console.log(newRestaurant);
+console.log(newRestaurant); */
 
 ///////////////// Rest pattern and parameters ///////////////
 
@@ -125,6 +125,43 @@ console.log(weekdays);
 // Functions
 restaurant.orderPizza(`pepperoni`, `onions`, `olives`, `spinach`); //	First ingredient store in mainIngredient, the rest in otherIngredients
 restaurant.orderPizza(`mushrooms`); // Mushrooms as main ingredient, creates an empty array for other ingredients
+
+////////////////// Short circuiting ///////////////////
+
+// || examples
+const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guest1); // Returns 10 which is the default value because restaurant.numGuests doesn't exist
+
+// Defining the value of numGuests
+restaurant.numGuests = 23;
+const guest2 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guest2); // Skips default value because it got overridden by 23
+
+// With short circuiting
+const guest3 = restaurant.numGuests || 10;
+console.log(guest3); // Returns 23 because restaurant.numGuests was defined, therefore it's become a truthy value. WILL NOT WORK IF DEFINED AS 0 BECAUSE IT'S A FALSY VALUE
+
+// && example
+// If it exist then execute function
+if (restaurant.orderPizza) {
+  restaurant.orderPizza(`mushrooms`, `spinach`, `onions`);
+}
+
+// With short circuiting
+// If doesn't exist then stop, if exist then continue
+restaurant.orderPizza &&
+  restaurant.orderPizza(`mushrooms`, `spinach`, `onions`);
+
+//////////////// Nullish Coalescing Operator /////////////
+
+restaurant.numGuests = 0;
+// With short circuiting
+const guestNotCorrect = restaurant.numGuests || 10;
+console.log(guestNotCorrect); // Logs 10 even though the real value is 0
+
+// With nullish coalescing operator
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect); // Logs 0, which is the correct value
 
 //////////////// DESTRUCTURING ARRAYS ///////////////////
 
@@ -355,38 +392,229 @@ restaurant.orderPizza(`mushrooms`); // Mushrooms as main ingredient, creates an 
 console.log(`---- OR ----`);
 // Use any data type, return any data type, short-circuiting or short circuit evaluation
 
-console.log(3 || `Mathieu`); // Logs 3, short circuiting for the || operator means that if the first value is truthy then it will return that value
-console.log(`` || `Mathieu`); // Mathieu
+// For || short circuiting means it returns the first truty value without evaluating the other parameters.
+console.log(3 || `Mathieu`); // Logs 3
+console.log(`` || `Mathieu`); // Mathieu because '' is an empty string, therefore it's falsy
 console.log(true || 0); // true
-console.log(undefined || null); // null, even if null is falsy because it's the last value in the chain
+console.log(undefined || null); // null, even if null is falsy because it's the last value in the chain, it gets returned by default
 
 console.log(undefined || 0 || `` || `Hello` || 23 || null); // Hello, because it's the first truthy value
 
+// Example with default value
 const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guest1); // Returns 10
+console.log(guest1); // Returns 10 which is the default value because restaurant.numGuests isn't defined
 
+// Defining the value of numGuests
 restaurant.numGuests = 23;
 const guest2 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guest2); // Skips default value because it got overridden by 23
+console.log(guest2); // Skips default value because it got overridden by 23 which is truthy
 
+// With short circuiting
 const guest3 = restaurant.numGuests || 10;
 console.log(guest3); // Returns 23 because restaurant.numGuests was defined, therefore it's become a truthy value. WILL NOT WORK IF DEFINED AS 0 BECAUSE IT'S A FALSY VALUE
 
 console.log(`---- AND ----`);
+
 // Works in the opposite way, returns the first falsy value or the last value
 console.log(0 && `Mathieu`); // Returns 0
-console.log(7 && `Mathieu`);
+console.log(7 && `Mathieu`); // Returns Mathieu
 
 console.log(`Hello` && 23 && null && `Mathieu`); // Returns null
 
-// Practical example
-if (restaurant.orderPasta) {
-  restaurant.orderPasta(`mushrooms`, `spinach`, `onions`);
+// && example 
+// If it exist then execute function
+if (restaurant.orderPizza) {
+  restaurant.orderPizza(`mushrooms`, `spinach`, `onions`);
 }
-// Can be replaced by:
-restaurant.orderPasta &&
-  restaurant.orderPasta(`mushrooms`, `spinach`, `onions`);
+
+// With short circuiting 
+// If doesn't exist then stop, if exist then continue
+restaurant.orderPizza &&
+  restaurant.orderPizza(`mushrooms`, `spinach`, `onions`);
 
 */
 
 /////////////////////// NULLISH COALESCING OPERATOR (??) /////////////////////////
+
+/*
+
+// Corrects the short circuiting flaw that makes it so 0 doesn't work as a value
+// Works with nullish values, so null or undefined, instead of truthy and falsy values
+
+restaurant.numGuests = 0;
+// With short circuiting
+const guestNotCorrect = restaurant.numGuests || 10;
+console.log(guestNotCorrect); // Logs 10 even though the real value is 0
+
+// With nullish coalescing operator
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+
+*/
+
+///////////////////////// LOGICAL ASSIGNMENT OPERATORS ////////////////////////
+
+/*
+
+const rest1 = {
+  name: `Capri`,
+  numGuests: 20,
+};
+
+const rest2 = {
+  name: `Capri`,
+  numGuests: 0,
+};
+
+const rest3 = {
+  name: `La Piazza`,
+  owner: `Giovanni Rossi`,
+};
+
+const rest4 = {
+  name: `La Piazza`,
+  owner: `Giovanni Rossi`,
+  numGuests: 0,
+};
+
+const rest5 = {
+  name: `Mathieu Patate`,
+  owner: `Mathieu`,
+};
+
+const rest6 = {
+  name: `Mathieu Patate`,
+  owner: `Mathieu`,
+  numGuests: 0,
+};
+
+// Assigning a default numGuests with OR
+rest1.numGuests = rest1.numGuests || 10;
+console.log(rest1);
+rest2.numGuests = rest2.numGuests || 10;
+console.log(rest2); // numGuests returned as 10 even if 0 because 0 is falsy
+
+// With OR assignment operator
+
+rest3.numGuests ||= 10; // Same result as previous example but shorter
+console.log(rest3); // Returns numGuests as 10 because it wasn't assigned to the object previously
+rest4.numGuests ||= 10;
+console.log(rest4); // Also returns 10 as numGuests even if it's zero because it works just like short circuiting
+
+// With nullish assignment operator
+rest5.numGuests ??= 10;
+console.log(rest5); // Returns numGuests as 10 because it's not defined
+rest6.numGuests ??= 10;
+console.log(rest6); // Returns numGuests as 0 even if it's falsy
+
+// Replacing data that's already defined
+
+// With &&
+rest4.owner = rest4.owner && `<ANONYMOUS>`;
+console.log(rest4); // Returns <ANONYMOUS> because the first value is truthy, defaults to the last value or the first falsy value
+rest1.owner = rest1.owner && `<ANONYMOUS>`;
+console.log(rest1); // Returns undefined because rest1.owner is falsy
+
+// With && assignment operator
+rest5.owner &&= `<ANONYMOUS>`;
+console.log(rest5); // Returns <ANONYMOUS>
+rest2.owner &&= `<ANONYMOUS>`;
+console.log(rest2); // Doesn't return any data for owner, which is an even better result than before
+
+*/
+
+///////////////////// Coding Challenge #1 ////////////////////////
+
+const game = {
+  team1: "Bayern Munich",
+  team2: "Borrussia Dortmund",
+  players: [
+    [
+      "Neuer",
+      "Pavard",
+      "Martinez",
+      "Alaba",
+      "Davies",
+      "Kimmich",
+      "Goretzka",
+      "Coman",
+      "Muller",
+      "Gnarby",
+      "Lewandowski",
+    ],
+    [
+      "Burki",
+      "Schulz",
+      "Hummels",
+      "Akanji",
+      "Hakimi",
+      "Weigl",
+      "Witsel",
+      "Hazard",
+      "Brandt",
+      "Sancho",
+      "Gotze",
+    ],
+  ],
+  score: "4:0",
+  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+  date: "Nov 9th, 2037",
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+
+/* 
+We're building a football betting app (soccer for my American friends 😅)!
+
+Suppose we get data from a web service about a certain game (below). In this challenge we're gonna work with the data. So here are your tasks:
+
+1. Create one player array for each team (variables 'players1' and 'players2') 
+*/
+const [players1, players2] = game.players;
+console.log(players1, players2);
+
+/*
+2. The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players 
+*/
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+
+/*
+3. Create an array 'allPlayers' containing all players of both teams (22 players)
+*/
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+/*
+4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a new array ('players1Final') containing all the original team1 players plus 'Thiago', 'Coutinho' and 'Perisic'
+*/
+const players1Final = [...players1, `Thiago`, `Coutinho`, `Perisic`];
+console.log(players1Final);
+
+/*
+5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
+*/
+const team1 = game.odds.team1;
+const draw = game.odds.x;
+const team2 = game.odds.team2;
+console.log(team1, draw, team2);
+// Final script solution (see destructuring):
+/* const {
+    odds: { team1, x: draw, team2 },
+  } = game;
+  console.log(team1, draw, team2); */
+
+/*
+6. Write a function ('printGoals') that receives an arbitrary number of player names (NOT an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
+*/
+
+/*
+7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator.
+
+TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
+
+GOOD LUCK 😀
+*/
